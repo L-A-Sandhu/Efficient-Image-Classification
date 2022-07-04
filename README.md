@@ -2,7 +2,7 @@
 
 Image classification is a simple case where we have to detect the presence of a particular class inside an image frame. In this repo we have used inception net and Mobile Net for image classfication on a **cifar10** benchmark dataset. Clone this repo please follow the following steps 
 ```
-gitv clone https://github.com/L-A-Sandhu/Mobile-Net_Inception-Net_Cifar10_Image_classification.git
+git clone https://github.com/L-A-Sandhu/Mobile-Net_Inception-Net_Cifar10_Image_classification.git
 
 ```
 
