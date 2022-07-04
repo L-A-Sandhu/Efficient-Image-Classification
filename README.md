@@ -10,7 +10,6 @@ The rest of the repository is divided as follows.
   1. Mobile Net 
   2. Inception Net
 
-```
   
 ## Mobile Net
 
