@@ -16,16 +16,18 @@ This repository requires
 * **matplotlib**
 * **scipy**
 * **protobuf**
-
+For complete installation please follow the following steps
+```
+conda create  -n <environment -name> python==3.7.4
+conda activate <environment-name>
+pip install -r requirements.txt
+```
   
 ## Mobile Net
 
 In this section we will explain traning, testing and infrence steps for Mobile Net. please follow the following commands 
 ```
-cd 
-conda create  -n <environment -name> python==3.7.4
-conda activate <environment-name>
-pip install -r requirements.txt
+
 cd M0bile_Net/
 ```
 ### Traning 
