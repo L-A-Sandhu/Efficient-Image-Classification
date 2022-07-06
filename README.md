@@ -1,4 +1,4 @@
-# Mobile-Net_Inception-Net_Cifar10_Image_classification\
+# Efficient-Image-Classification
 
  This repository contains comparisons of different convolution neural networks for the CIFAR-10 data-set. Clone this repo please follow the following steps 
 ```
