@@ -1,6 +1,6 @@
 # Efficient-Image-Classification
 
- This repository contains comparisons of different convolution neural networks for the CIFAR-10 data-set. Clone this repo please follow the following steps 
+ This repository contains comparisons of different convolution neural networks for the CIFAR-10 data-set.The model is fine tunned on cifar10 dataset. The model were earlier trained on imagenet dataset. The script automatically downloads the cifar 10 dataset. Clone this repo please follow the following steps 
 ```
 git clone https://github.com/L-A-Sandhu/Mobile-Net_Inception-Net_Cifar10_Image_classification.git
 
@@ -32,7 +32,6 @@ pip install -r requirements.txt
 This section explains traning, testing and infrence steps for Mobile Net. please follow the following commands 
 
 ### Traning 
-The model is fine tunned on cifar10 dataset. The model was earlier trained on imagenet dataset. The script automatically downloads the cifa10 dataset. 
 ```
 python Mobile-Net.py  --model_dir=<Location for saving model>  --inp=<train , test or infer> --b_s=< Batch size> --e=<epoch>
 example command 
@@ -53,7 +52,7 @@ This section explains traning, testing and infrence steps for Inception Net. ple
 cd ../Inception_NET/
 ```
 ### Traning 
-The model is fine tunned on cifar10 dataset. The model was earlier trained on imagenet dataset. The script automatically downloads the cifa10 dataset. 
+ 
 ```
 python Inception-Net.py  --model_dir=<Location for saving model> --inp=<train , test or infer> --b_s=< Batch size> --e=<epoch>
 example command 
