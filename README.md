@@ -16,7 +16,9 @@ This repository requires
 * **matplotlib**
 * **scipy**
 * **protobuf**
-* For complete installation please follow the following steps
+
+
+For complete installation please follow the following steps
 ```
 conda create  -n <environment -name> python==3.7.4
 conda activate <environment-name>
