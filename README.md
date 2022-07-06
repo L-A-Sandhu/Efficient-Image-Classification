@@ -1,14 +1,21 @@
 # Mobile-Net_Inception-Net_Cifar10_Image_classification\
 
-Image classification is a simple case where we have to detect the presence of a particular class inside an image frame. In this repo we have used inception net and Mobile Net for image classfication on a **cifar10** benchmark dataset. Clone this repo please follow the following steps 
+ This repository contains comparisons of different convolution neural networks for the CIFAR-10 data-set. Clone this repo please follow the following steps 
 ```
 git clone https://github.com/L-A-Sandhu/Mobile-Net_Inception-Net_Cifar10_Image_classification.git
 
 ```
 
 The rest of the repository is divided as follows. 
+  1. Requirements
   1. Mobile Net 
   2. Inception Net
+## Requirements 
+This repository requires 
+* **tensorflow**
+* **matplotlib**
+* **scipy**
+* **protobuf**
 
   
 ## Mobile Net
@@ -16,7 +23,7 @@ The rest of the repository is divided as follows.
 In this section we will explain traning, testing and infrence steps for Mobile Net. please follow the following commands 
 ```
 cd 
-conda create env -n <environment -name> python==3.7.4
+conda create  -n <environment -name> python==3.7.4
 conda activate <environment-name>
 pip install -r requirements.txt
 cd M0bile_Net/
