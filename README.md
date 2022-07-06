@@ -8,8 +8,9 @@ git clone https://github.com/L-A-Sandhu/Mobile-Net_Inception-Net_Cifar10_Image_c
 
 The rest of the repository is divided as follows. 
   1. Requirements
-  1. Mobile Net 
-  2. Inception Net
+  2. Mobile Net 
+  3. Inception Net
+  4. Summary
 ## Requirements 
 This repository requires 
 * **tensorflow**
@@ -20,6 +21,7 @@ This repository requires
 
 For complete installation please follow the following steps
 ```
+cd M0bile_Net/
 conda create  -n <environment -name> python==3.7.4
 conda activate <environment-name>
 pip install -r requirements.txt
@@ -27,12 +29,10 @@ pip install -r requirements.txt
   
 ## Mobile Net
 
-In this section we will explain traning, testing and infrence steps for Mobile Net. please follow the following commands 
-```
+This section explains traning, testing and infrence steps for Mobile Net. please follow the following commands 
 
-cd M0bile_Net/
-```
 ### Traning 
+The model is fine tunned on cifar10 dataset. The model was earlier trained on imagenet dataset. The script automatically downloads the cifa10 dataset. 
 ```
 python Mobile-Net.py  --model_dir=<Location for saving model>  --inp=<train , test or infer> --b_s=< Batch size> --e=<epoch>
 example command 
@@ -48,11 +48,12 @@ python Mobile-Net.py  --model_dir='./checkpoint/'  --inp=test --b_s=16 --e=100
 ```
 
 ## Inception-Net
-In this section we will explain traning, testing and infrence steps for Inception Net. please follow the following commands 
+This section explains traning, testing and infrence steps for Inception Net. please follow the following commands 
 ```
 cd ../Inception_NET/
 ```
 ### Traning 
+The model is fine tunned on cifar10 dataset. The model was earlier trained on imagenet dataset. The script automatically downloads the cifa10 dataset. 
 ```
 python Inception-Net.py  --model_dir=<Location for saving model> --inp=<train , test or infer> --b_s=< Batch size> --e=<epoch>
 example command 
@@ -65,4 +66,4 @@ example command
 python Inception-Net.py  --model_dir='./checkpoint/' --inp=test --b_s=16 --e=100
 
 ```
-
+## Summary
