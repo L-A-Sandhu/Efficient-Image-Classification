@@ -17,6 +17,8 @@ import cv2
 import os
 import argparse
 from tensorflow.keras.datasets import cifar10
+from sklearn.metrics import f1_score, precision_score, recall_score, confusion_matrix, accuracy_score
+
 
 
 def data_load():
@@ -75,7 +77,7 @@ def A_L_Plot(history):
     plt.title('model loss')
     plt.ylabel('loss function value on training data')
     plt.xlabel('epoch')
-    # plt.savefig('Training_loss.png',dpi=100)
+    plt.savefig('Training_loss.png',dpi=100)
     plt.show()
     
 
@@ -89,7 +91,7 @@ def A_L_Plot(history):
     plt.ylabel('Accuracy')
     plt.title('Model Training and Validation Accuracy')
     plt.xlabel('epoch')
-    # plt.savefig('Traning_accuracy.png')
+    plt.savefig('Traning_accuracy.png')
     plt.show()
 if __name__ == '__main__':
 
@@ -113,8 +115,8 @@ if __name__ == '__main__':
                                                                 classes=len(class_names),
                                                                 classifier_activation='softmax'
                                                                 )
-            Model=model_init(INET)
-            early_stop = callbacks.EarlyStopping(monitor='val_loss', mode='min', verbose=1, patience=30)
+            Model=model_init(INET, class_names)
+            early_stop = callbacks.EarlyStopping(monitor='val_loss', mode='min', verbose=1, patience=7)
             Model.compile(loss='categorical_crossentropy',
                           optimizer='adam',
                           metrics=['accuracy'])
@@ -148,6 +150,9 @@ if __name__ == '__main__':
             print('precision:',precision_score(test_labels1,L_hat, average="macro"))
             print('Recall:',recall_score(test_labels1,L_hat, average="macro"))
             print('F1 Sore :', f1_score(test_labels1,L_hat, average="macro"))
+            print('Accuracy:', accuracy_score(test_labels1,L_hat))
+            print('confusion_matrix:',confusion_matrix(test_labels1,L_hat))
+
 
 
 
