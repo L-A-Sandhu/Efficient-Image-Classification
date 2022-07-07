@@ -67,7 +67,7 @@ python Inception-Net.py  --model_dir='./checkpoint/' --inp=test --b_s=16 --e=100
 
 ```
 ## Pretrained Model
-we have trained the model on cifar10 dataset with batch size 128 and 50 epochs. You can download the pretrained weights and place them at **./Inception_NET/checkpoint/**  or **./M0bile_Net/checkpoint/**/older for inferene. The pretrained weights for Mobile net and Inception Net can be be downloaded from the folllowing links respectively. 
+ In this work the models are trained on cifar10 dataset with batch size 128 and 50 epochs. You can download the pretrained weights and place them at **./Inception_NET/checkpoint/**  or **./M0bile_Net/checkpoint/**/  for inferene. The pretrained weights for Mobile net and Inception Net can be be downloaded from the folllowing links respectively. 
 ```
 https://drive.google.com/file/d/1OCxDNDUbMJcoo8QbzB6hM4r4yqXOXpZU/view?usp=sharing
 https://drive.google.com/file/d/144j9-G-v2x6YCTZ4u9_NDzXpVnVwT_kC/view?usp=sharing
