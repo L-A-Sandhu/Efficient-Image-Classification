@@ -2,7 +2,7 @@
 
  This repository contains comparisons of different convolution neural networks for the CIFAR-10 data-set.The model is fine tunned on cifar10 dataset. The model were earlier trained on imagenet dataset. The script automatically downloads the cifar 10 dataset. Clone this repo please follow the following steps 
 ```
-git clone https://github.com/L-A-Sandhu/Mobile-Net_Inception-Net_Cifar10_Image_classification.git
+git clone https://github.com/L-A-Sandhu/Efficient-Image-Classification.git
 
 ```
 
