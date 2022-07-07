@@ -8,8 +8,8 @@ git clone https://github.com/L-A-Sandhu/Efficient-Image-Classification.git
 
 The rest of the repository is divided as follows. 
   1. Requirements
-  2. Mobile Net 
-  3. Inception Net
+  2. Fine Tuning
+  3. Using Pretrained Model
   4. Summary
 ## Requirements 
 This repository requires 
@@ -26,19 +26,20 @@ conda create  -n <environment -name> python==3.7.4
 conda activate <environment-name>
 pip install -r requirements.txt
 ```
-  
-## Mobile Net
+## Fine Tuning 
+This section disccusses the fine tunning method for Mobile Net and Inception net. The keras implementations of Mobile Net and Inception Net is used in this work. Their weights are trained on Image Net dataset. However, in this work we have  fine tuned the model on cifar10 dataset. 
+### Mobile Net
 
 This section explains traning, testing and infrence steps for Mobile Net. please follow the following commands 
 
-### Traning 
+#### Traning 
 ```
 python Mobile-Net.py  --model_dir=<Location for saving model>  --inp=<train , test or infer> --b_s=< Batch size> --e=<epoch>
 example command 
 python Mobile-Net.py  --model_dir='./checkpoint/'  --inp=train --b_s=16 --e=100
 
 ```
-### Test 
+#### Test 
 ```
 python Mobile-Net.py  --model_dir=<Location for saving model>  --inp=<train , test or infer> --b_s=< Batch size> --e=<epoch>
 example command 
@@ -46,7 +47,7 @@ python Mobile-Net.py  --model_dir='./checkpoint/'  --inp=test --b_s=16 --e=100
 
 ```
 
-## Inception-Net
+### Inception-Net
 This section explains traning, testing and infrence steps for Inception Net. please follow the following commands 
 ```
 cd ../Inception_NET/
@@ -54,15 +55,16 @@ cd ../Inception_NET/
 ### Traning 
  
 ```
-python Inception-Net.py  --model_dir=<Location for saving model> --inp=<train , test or infer> --b_s=< Batch size> --e=<epoch>
+python Inception-Net.py  --model_dir=<Location for saving model> --inp=<train , test > --b_s=< Batch size> --e=<epoch>
 example command 
 python Inception-Net.py  --model_dir='./checkpoint/' --inp=train --b_s=16 --e=100
 ```
 ### Test 
 ```
-python Inception-Net.py  --model_dir=<Location for saving model> --inp=<train , test or infer> --b_s=< Batch size> --e=<epoch>
+python Inception-Net.py  --model_dir=<Location for saving model> --inp=<train , test > --b_s=< Batch size> --e=<epoch>
 example command 
 python Inception-Net.py  --model_dir='./checkpoint/' --inp=test --b_s=16 --e=100
 
 ```
+## 
 ## Summary
