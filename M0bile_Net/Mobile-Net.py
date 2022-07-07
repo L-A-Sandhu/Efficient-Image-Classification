@@ -149,6 +149,13 @@ if __name__ == '__main__':
                 save_traces=True,)
         if args.inps == 'test':
             M1=tf.keras.models.load_model(args.model_dir, custom_objects=None, compile=True, options=None)
-            test_loss, test_acc = M1.evaluate(test_images, test_labels)
-            print('Test accuracy:', test_acc)
+            L_hat= M1.predict(test_images)
+            L_hat = np.argmax(L_hat, axis=1)
+            print(np.unique(L_hat))
+            test_labels1=np.argmax(test_labels,axis=1)
+            print(np.unique(L_hat))
+            print('precision:',precision_score(test_labels1,L_hat, average="macro"))
+            print('Recall:',recall_score(test_labels1,L_hat, average="macro"))
+            print('F1 Sore :', f1_score(test_labels1,L_hat, average="macro"))
+
 
