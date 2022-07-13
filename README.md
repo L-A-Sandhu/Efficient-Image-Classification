@@ -1,6 +1,6 @@
 # Efficient-Image-Classification
 
- This repository contains comparisons of different convolution neural networks for the CIFAR-10 data-set.The model is fine tunned on cifar10 dataset. The model were earlier trained on imagenet dataset. The script automatically downloads the cifar 10 dataset. Clone this repo please follow the following steps 
+ This repository contains comparisons of different convolution neural networks for the CIFAR-10 data-set.ImageNet pretrained models have been fine tuned on CIFAR-10 dataset.The script automatically downloads the cifar 10 dataset. Clone this repo please follow the following steps 
 ```
 git clone https://github.com/L-A-Sandhu/Efficient-Image-Classification.git
 
@@ -69,15 +69,15 @@ python Inception-Net.py  --model_dir='./checkpoint/' --inp=test --b_s=16 --e=100
 ## Pretrained Model
  In this work the models are trained on cifar10 dataset with batch size 128 and 50 epochs. You can download the pretrained weights and place them at **./Inception_NET/checkpoint/**  or **./M0bile_Net/checkpoint/**/  for inferene. The pretrained weights for Mobile net and Inception Net can be be downloaded from the folllowing links respectively. 
 ```
-https://drive.google.com/file/d/1OCxDNDUbMJcoo8QbzB6hM4r4yqXOXpZU/view?usp=sharing
+ https://drive.google.com/file/d/1OCxDNDUbMJcoo8QbzB6hM4r4yqXOXpZU/view?usp=sharing
 https://drive.google.com/file/d/144j9-G-v2x6YCTZ4u9_NDzXpVnVwT_kC/view?usp=sharing
 ``` 
 ## Results and comparision 
 Test results and comparision for both models is shown in the following table 
-| Model         | F1-Score | Accuracy | Precision | Recall |
-|---------------|----------|----------|-----------|--------|
-| Mobile-Net    | 0.835    | 0.836    | 0.848     | 0.836  |
-| Inception-Net | 0.812    | 0.811    | 0.82      | 0.81   |
+| Model         | Parameters | Accuracy | size on disk | Recall |
+|---------------|------------|----------|-----------|--------|
+| Mobile-Net    | 3,783,510  | 0.836    | 38.8   | 0.836  |
+| Inception-Net | 0.812      | 0.811    | 174.2   | 0.81   |
 
 
 ### Confusion Matrix 
