@@ -30,22 +30,27 @@ pip install -r requirements.txt
 This section disccusses the fine tunning method for Mobile Net and Inception net. The keras implementations of Mobile Net and Inception Net is used in this work. Their weights are trained on Image Net dataset. However, this work fine tuned the model on cifar10 dataset. 
 ### Mobile Net
 
-This section explains traning, testing and infrence steps for Mobile Net. please follow the following commands 
+This section explains traning, testing and fine tuning  steps for Mobile Net. please follow the following commands 
 
-#### Traning 
+### Fine Tune
+ 
 ```
-python Mobile-Net.py  --model_dir=<Location for saving model>  --inp=<train , test or infer> --b_s=< Batch size> --e=<epoch>
+python Mobile-Net.py  --model_dir=<Location for saving model> --inp=<tune, train, test > --b_s=< Batch size> --e=<epoch>
 example command 
-python Mobile-Net.py  --model_dir='./checkpoint/'  --inp=train --b_s=16 --e=100
-
+python Mobile-Net.py  --model_dir='./checkpoint/' --inp=tune --b_s=16 --e=100
 ```
-#### Test 
+### Train
+ 
 ```
-python Mobile-Net.py  --model_dir=<Location for saving model>  --inp=<train , test or infer> --b_s=< Batch size> --e=<epoch>
+python Mobile-Net.py --model_dir=<Location for saving model> --inp=<tune, train, test > --b_s=< Batch size> --e=<epoch>
 example command 
-python Mobile-Net.py  --model_dir='./checkpoint/'  --inp=test --b_s=16 --e=100
-
+python Mobile-Net.py --model_dir='./checkpoint/' --inp=train --b_s=16 --e=100
 ```
+### Test 
+```
+python Mobile-Net.py  --model_dir=<Location for saving model> --inp=<tune, test, train>
+example command 
+python Mobile-Net.py --model_dir='./checkpoint/' --inp=test
 
 ### Inception-Net
 This section explains Fine tunning, Traning,  testing and infrence steps for Inception Net. please follow the following commands 
@@ -59,7 +64,7 @@ python Inception-Net.py  --model_dir=<Location for saving model> --inp=<tune, tr
 example command 
 python Inception-Net.py  --model_dir='./checkpoint/' --inp=tune --b_s=16 --e=100
 ```
-### Fine Tune
+### Train
  
 ```
 python Inception-Net.py  --model_dir=<Location for saving model> --inp=<tune, train, test > --b_s=< Batch size> --e=<epoch>
