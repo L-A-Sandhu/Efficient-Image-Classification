@@ -51,7 +51,7 @@ python Mobile-Net.py --model_dir='./checkpoint/' --inp=train --b_s=16 --e=100
 python Mobile-Net.py  --model_dir=<Location for saving model> --inp=<tune, test, train>
 example command 
 python Mobile-Net.py --model_dir='./checkpoint/' --inp=test
-
+```
 ### Inception-Net
 This section explains Fine tunning, Traning,  testing and infrence steps for Inception Net. please follow the following commands 
 ```
