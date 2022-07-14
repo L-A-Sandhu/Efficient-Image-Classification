@@ -26,7 +26,7 @@ import os
 import argparse
 from tensorflow.keras.datasets import cifar10
 from sklearn.metrics import f1_score, precision_score, recall_score, confusion_matrix, accuracy_score
-
+import time
 
 
 
@@ -117,7 +117,7 @@ if __name__ == '__main__':
 
         train_images,test_images,train_labels,test_labels,class_names=data_load()
 
-        if args.inps == 'train' :
+        if args.inps == 'tune' :
             MobileNetV2 = MobileNetV2(include_top=False,
                             input_shape=(96,96,3),
                               weights="imagenet",
@@ -151,7 +151,13 @@ if __name__ == '__main__':
                 save_traces=True,)
         if args.inps == 'test':
             M1=tf.keras.models.load_model(args.model_dir, custom_objects=None, compile=True, options=None)
+            [a,b,c,d]=(np.shape(test_images))
+            t=time.time()
             L_hat= M1.predict(test_images)
+            t=time.time()-t
+            v=t/a
+            print('latency:', v)
+            
             L_hat = np.argmax(L_hat, axis=1)
             print(np.unique(L_hat))
             test_labels1=np.argmax(test_labels,axis=1)
@@ -161,3 +167,37 @@ if __name__ == '__main__':
             print('F1 Sore :', f1_score(test_labels1,L_hat, average="macro"))
             print('Accuracy:', accuracy_score(test_labels1,L_hat))
             print('confusion_matrix:',confusion_matrix(test_labels1,L_hat))
+
+
+        if args.inps == 'train' :
+            MobileNetV2 = MobileNetV2(include_top=False,
+                            input_shape=(96,96,3),
+                              weights=None,
+                              classes=len(class_names),
+                                alpha=1.0,
+                               input_tensor=None)
+            Model=model_init(MobileNetV2,class_names)
+            early_stop = callbacks.EarlyStopping(monitor='val_loss', mode='min', verbose=1, patience=7)
+            Model.compile(loss='categorical_crossentropy',
+                          optimizer='adam',
+                          metrics=['accuracy'])
+            history = Model.fit(train_images, 
+                      train_labels,
+                      epochs=args.e,
+                      batch_size=args.b_s,
+                      verbose=1,
+                      validation_data=(test_images,test_labels),
+                      callbacks = [early_stop]
+                   )
+            A_L_Plot(history)
+            if not os.path.exists(args.model_dir):
+                os.makedirs(args.model_dir)
+            tf.keras.models.save_model(
+                Model,
+                args.model_dir,
+                overwrite=True,
+                include_optimizer=True,
+                save_format=None,
+                signatures=None,
+                options=None,
+                save_traces=True,)

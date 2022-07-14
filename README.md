@@ -48,22 +48,28 @@ python Mobile-Net.py  --model_dir='./checkpoint/'  --inp=test --b_s=16 --e=100
 ```
 
 ### Inception-Net
-This section explains traning, testing and infrence steps for Inception Net. please follow the following commands 
+This section explains Fine tunning, Traning,  testing and infrence steps for Inception Net. please follow the following commands 
 ```
 cd ../Inception_NET/
 ```
-### Traning 
+### Fine Tune
  
 ```
-python Inception-Net.py  --model_dir=<Location for saving model> --inp=<train , test > --b_s=< Batch size> --e=<epoch>
+python Inception-Net.py  --model_dir=<Location for saving model> --inp=<tune, train, test > --b_s=< Batch size> --e=<epoch>
+example command 
+python Inception-Net.py  --model_dir='./checkpoint/' --inp=tune --b_s=16 --e=100
+```
+### Fine Tune
+ 
+```
+python Inception-Net.py  --model_dir=<Location for saving model> --inp=<tune, train, test > --b_s=< Batch size> --e=<epoch>
 example command 
 python Inception-Net.py  --model_dir='./checkpoint/' --inp=train --b_s=16 --e=100
 ```
 ### Test 
 ```
-python Inception-Net.py  --model_dir=<Location for saving model> --inp=<train , test > --b_s=< Batch size> --e=<epoch>
-example command 
-python Inception-Net.py  --model_dir='./checkpoint/' --inp=test --b_s=16 --e=100
+python Inception-Net.py  --model_dir=<Location for saving model> --inp=<tune, test, train>
+python Inception-Net.py  --model_dir='./checkpoint/' --inp=test
 
 ```
 ## Pretrained Model
@@ -74,10 +80,10 @@ https://drive.google.com/file/d/144j9-G-v2x6YCTZ4u9_NDzXpVnVwT_kC/view?usp=shari
 ``` 
 ## Results and comparision 
 Test results and comparision for both models is shown in the following table 
-| Model         | Parameters | Accuracy | size on disk | Recall |
+| Model         | Parameters | Accuracy | Latency   | Size on Disk (MB)|
 |---------------|------------|----------|-----------|--------|
-| Mobile-Net    | 3,783,510  | 0.836    | 38.8   | 0.836  |
-| Inception-Net | 0.812      | 0.811    | 174.2   | 0.81   |
+| Mobile-Net    | 3,783,510  | 0.836    |  0.0004   | 38.8   |
+| Inception-Net | 22,115,894  | 0.811    |  0.0006  | 174.2  |
 
 
 ### Confusion Matrix 
