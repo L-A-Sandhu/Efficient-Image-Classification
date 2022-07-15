@@ -35,22 +35,28 @@ This section explains traning, testing and fine tuning  steps for Mobile Net. pl
 ### Fine Tune
  
 ```
-python Mobile-Net.py  --model_dir=<Location for saving model> --inp=<tune, train, test > --b_s=< Batch size> --e=<epoch>
+python Mobile-Net.py  --model_dir=<Location for saving model> --inp=<tune, train, test, resume > --b_s=< Batch size> --e=<epoch>
 example command 
 python Mobile-Net.py  --model_dir='./checkpoint/' --inp=tune --b_s=16 --e=100
 ```
 ### Train
  
 ```
-python Mobile-Net.py --model_dir=<Location for saving model> --inp=<tune, train, test > --b_s=< Batch size> --e=<epoch>
+python Mobile-Net.py --model_dir=<Location for saving model> --inp=<tune, train, test, resume > --b_s=< Batch size> --e=<epoch>
 example command 
 python Mobile-Net.py --model_dir='./checkpoint/' --inp=train --b_s=16 --e=100
 ```
 ### Test 
 ```
-python Mobile-Net.py  --model_dir=<Location for saving model> --inp=<tune, test, train>
+python Mobile-Net.py  --model_dir=<Location for saving model> --inp=<tune, test, train, resume>
 example command 
 python Mobile-Net.py --model_dir='./checkpoint/' --inp=test
+```
+### Resume Training 
+```
+python Mobile-Net.py  --model_dir=<Location for saving model> --inp= <tune, train, test, resume > --b_s=< Batch size> --e=<epoch>
+example command 
+python Mobile-Net.py  --model_dir='./checkpoint/' --inp=resume --b_s=16 --e=100
 ```
 ### Inception-Net
 This section explains Fine tunning, Traning,  testing and infrence steps for Inception Net. please follow the following commands 
@@ -77,8 +83,16 @@ python Inception-Net.py  --model_dir=<Location for saving model> --inp=<tune, te
 python Inception-Net.py  --model_dir='./checkpoint/' --inp=test
 
 ```
+
+### Resume Training 
+```
+python Inception-Net.py  --model_dir=<Location for saving model> --inp= <tune, train, test, resume > --b_s=< Batch size> --e=<epoch>
+example command 
+python Inception-Net.py   --model_dir='./checkpoint/' --inp=resume --b_s=16 --e=100
+```
+
 ## Pretrained Model
- In this work the models are trained on cifar10 dataset with batch size 128 and 50 epochs. You can download the pretrained weights and place them at **./Inception_NET/checkpoint/**  or **./M0bile_Net/checkpoint/**/  for inferene. The pretrained weights for Mobile net and Inception Net can be be downloaded from the folllowing links respectively. 
+ In this work the models are trained on cifar10 dataset with batch size 128 and 50 epochs. You can download the pretrained weights and place them at **./Inception_NET/checkpoint/**  or **./M0bile_Net/checkpoint/**/  for inferene or resume training using the above mentioned commands. The pretrained weights for Mobile net and Inception Net can be be downloaded from the folllowing links respectively. 
 ```
  https://drive.google.com/file/d/1OCxDNDUbMJcoo8QbzB6hM4r4yqXOXpZU/view?usp=sharing
 https://drive.google.com/file/d/144j9-G-v2x6YCTZ4u9_NDzXpVnVwT_kC/view?usp=sharing
