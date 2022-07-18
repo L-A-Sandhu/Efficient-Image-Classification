@@ -19,6 +19,7 @@ import argparse
 from tensorflow.keras.datasets import cifar10
 from sklearn.metrics import f1_score, precision_score, recall_score, confusion_matrix, accuracy_score
 import time
+from keras.callbacks import ModelCheckpoint
 
 
 
@@ -108,21 +109,28 @@ if __name__ == '__main__':
         train_images,test_images,train_labels,test_labels,class_names=data_load()
 
         if args.inps == 'tune' :
+            if not os.path.exists(args.model_dir):
+                os.makedirs(args.model_dir)
+                INET=tf.keras.applications.inception_v3.InceptionV3(
+                                                                    include_top=False,
+                                                                    weights='imagenet',
+                                                                    input_tensor=None,
+                                                                    input_shape=(96,96,3),
+                                                                    pooling=None,
+                                                                    classes=len(class_names),
+                                                                    classifier_activation='softmax'
+                                                                    )
+                Model=model_init(INET, class_names)
+                early_stop = callbacks.EarlyStopping(monitor='val_loss', mode='min', verbose=1, patience=7)
+                checkpoint = ModelCheckpoint(args.model_dir, monitor='loss', verbose=1, save_best_only=True, mode='min')
 
-            INET=tf.keras.applications.inception_v3.InceptionV3(
-                                                                include_top=False,
-                                                                weights='imagenet',
-                                                                input_tensor=None,
-                                                                input_shape=(96,96,3),
-                                                                pooling=None,
-                                                                classes=len(class_names),
-                                                                classifier_activation='softmax'
-                                                                )
-            Model=model_init(INET, class_names)
-            early_stop = callbacks.EarlyStopping(monitor='val_loss', mode='min', verbose=1, patience=7)
-            Model.compile(loss='categorical_crossentropy',
-                          optimizer='adam',
-                          metrics=['accuracy'])
+                Model.compile(loss='categorical_crossentropy',
+                              optimizer='adam',
+                              metrics=['accuracy'])
+            else:
+                Model=tf.keras.models.load_model(args.model_dir, custom_objects=None, compile=True, options=None)
+                early_stop = callbacks.EarlyStopping(monitor='val_loss', mode='min', verbose=1, patience=7)
+                checkpoint = ModelCheckpoint(args.model_dir, monitor='loss', verbose=1, save_best_only=True, mode='min')
             os.system('clear')
             print('************************ Fine tuning ************************')
             history = Model.fit(train_images, 
@@ -131,20 +139,11 @@ if __name__ == '__main__':
                       batch_size=args.b_s,
                       verbose=1,
                       validation_data=(test_images,test_labels),
-                      callbacks = [early_stop]
+                      callbacks = [early_stop,checkpoint]
                    )
             A_L_Plot(history)
-            if not os.path.exists(args.model_dir):
-                os.makedirs(args.model_dir)
-            tf.keras.models.save_model(
-                Model,
-                args.model_dir,
-                overwrite=True,
-                include_optimizer=True,
-                save_format=None,
-                signatures=None,
-                options=None,
-                save_traces=True,)
+
+
         if args.inps == 'test':
             os.system('clear')
             print('************************ testing ************************')
@@ -168,6 +167,9 @@ if __name__ == '__main__':
     
         if args.inps == 'train':
 
+            if not os.path.exists(args.model_dir):
+                os.makedirs(args.model_dir)
+
             INET=tf.keras.applications.inception_v3.InceptionV3(
                                                                 include_top=False,
                                                                 weights=None,
@@ -179,6 +181,8 @@ if __name__ == '__main__':
                                                                 )
             Model=model_init(INET, class_names)
             early_stop = callbacks.EarlyStopping(monitor='val_loss', mode='min', verbose=1, patience=7)
+            checkpoint = ModelCheckpoint(args.model_dir, monitor='loss', verbose=1, save_best_only=True, mode='min')
+
             Model.compile(loss='categorical_crossentropy',
                           optimizer='adam',
                           metrics=['accuracy'])
@@ -190,17 +194,30 @@ if __name__ == '__main__':
                       batch_size=args.b_s,
                       verbose=1,
                       validation_data=(test_images,test_labels),
-                      callbacks = [early_stop]
+                      callbacks = [early_stop,checkpoint]
                    )
             A_L_Plot(history)
+
+        if args.inps  == 'resume':
+
+
             if not os.path.exists(args.model_dir):
-                os.makedirs(args.model_dir)
-            tf.keras.models.save_model(
-                Model,
-                args.model_dir,
-                overwrite=True,
-                include_optimizer=True,
-                save_format=None,
-                signatures=None,
-                options=None,
-                save_traces=True,)
+                os.system('clear')
+                print('********************************************** no  check point  found ********************************************** ')
+            else:
+                Model=tf.keras.models.load_model(args.model_dir, custom_objects=None, compile=True, options=None)
+                early_stop = callbacks.EarlyStopping(monitor='val_loss', mode='min', verbose=1, patience=7)
+                checkpoint = ModelCheckpoint(args.model_dir, monitor='loss', verbose=1, save_best_only=True, mode='min')
+                os.system('clear')
+                print('************************ Resuming Traning from check point************************')
+                history = Model.fit(train_images, 
+                          train_labels,
+                          epochs=args.e,
+                          batch_size=args.b_s,
+                          verbose=1,
+                          validation_data=(test_images,test_labels),
+                          callbacks = [early_stop,checkpoint]
+                       )
+                A_L_Plot(history)
+
+
