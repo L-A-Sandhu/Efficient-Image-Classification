@@ -25,70 +25,40 @@ cd M0bile_Net/
 conda create  -n <environment -name> python==3.7.4
 conda activate <environment-name>
 pip install -r requirements.txt
+cd ../
 ```
 ## Fine Tuning 
-This section disccusses the fine tunning method for Mobile Net and Inception net. The keras implementations of Mobile Net and Inception Net is used in this work. Their weights are trained on Image Net dataset. However, this work fine tuned the model on cifar10 dataset. 
-### Mobile Net
+This section disccusses the fine tunning method for Mobile Net and Inception net. The keras implementations of Mobile Net and Inception Net is used in this work. Their weights are trained on Image Net dataset. However, this work fine tuned the model on cifar10 dataset.  please  follow the following set of commands
 
-This section explains traning, testing and fine tuning  steps for Mobile Net. please follow the following commands 
+```
+cd < M0bile_Net or Inception_NET>
+```
 
 ### Fine Tune
  
 ```
-python Mobile-Net.py  --model_dir=<Location for saving model> --inp=<tune, train, test, resume > --b_s=< Batch size> --e=<epoch>
+python <Mobile-Net.py or Inception-Net.py >   --model_dir=<Location for saving model> --inp=<tune, train, test, resume > --b_s=< Batch size> --e=<epoch>
 example command 
 python Mobile-Net.py  --model_dir='./checkpoint/' --inp=tune --b_s=16 --e=100
 ```
 ### Train
  
 ```
-python Mobile-Net.py --model_dir=<Location for saving model> --inp=<tune, train, test, resume > --b_s=< Batch size> --e=<epoch>
+python <Mobile-Net.py or Inception-Net.py > --model_dir=<Location for saving model> --inp=<tune, train, test, resume > --b_s=< Batch size> --e=<epoch>
 example command 
 python Mobile-Net.py --model_dir='./checkpoint/' --inp=train --b_s=16 --e=100
 ```
 ### Test 
 ```
-python Mobile-Net.py  --model_dir=<Location for saving model> --inp=<tune, test, train, resume>
+python <Mobile-Net.py or Inception-Net.py >  --model_dir=<Location for saving model> --inp=<tune, test, train, resume>
 example command 
 python Mobile-Net.py --model_dir='./checkpoint/' --inp=test
 ```
 ### Resume Training 
 ```
-python Mobile-Net.py  --model_dir=<Location for saving model> --inp= <tune, train, test, resume > --b_s=< Batch size> --e=<epoch>
+python <Mobile-Net.py or Inception-Net.py >  --model_dir=<Location for saving model> --inp= <tune, train, test, resume > --b_s=< Batch size> --e=<epoch>
 example command 
 python Mobile-Net.py  --model_dir='./checkpoint/' --inp=resume --b_s=16 --e=100
-```
-### Inception-Net
-This section explains Fine tunning, Traning,  testing and infrence steps for Inception Net. please follow the following commands 
-```
-cd ../Inception_NET/
-```
-### Fine Tune
- 
-```
-python Inception-Net.py  --model_dir=<Location for saving model> --inp=<tune, train, test > --b_s=< Batch size> --e=<epoch>
-example command 
-python Inception-Net.py  --model_dir='./checkpoint/' --inp=tune --b_s=16 --e=100
-```
-### Train
- 
-```
-python Inception-Net.py  --model_dir=<Location for saving model> --inp=<tune, train, test > --b_s=< Batch size> --e=<epoch>
-example command 
-python Inception-Net.py  --model_dir='./checkpoint/' --inp=train --b_s=16 --e=100
-```
-### Test 
-```
-python Inception-Net.py  --model_dir=<Location for saving model> --inp=<tune, test, train>
-python Inception-Net.py  --model_dir='./checkpoint/' --inp=test
-
-```
-
-### Resume Training 
-```
-python Inception-Net.py  --model_dir=<Location for saving model> --inp= <tune, train, test, resume > --b_s=< Batch size> --e=<epoch>
-example command 
-python Inception-Net.py   --model_dir='./checkpoint/' --inp=resume --b_s=16 --e=100
 ```
 
 ## Pretrained Model
@@ -99,10 +69,10 @@ https://drive.google.com/file/d/144j9-G-v2x6YCTZ4u9_NDzXpVnVwT_kC/view?usp=shari
 ``` 
 ## Results and comparision 
 Test results and comparision for both models is shown in the following table 
-| Model         | Parameters | Accuracy | Latency   | Size on Disk (MB)|
-|---------------|------------|----------|-----------|--------|
-| Mobile-Net    | 3,783,510  | 0.836    |  0.0004   | 38.8   |
-| Inception-Net | 22,115,894  | 0.811    |  0.0006  | 174.2  |
+| Model         | Parameters | Accuracy | Latency(sec)   | Size on Disk (MB)|
+|---------------|------------|----------|-----------|-----------------------|
+| Mobile-Net    | 3,783,510  | 0.836    |  0.0004   |             38.89     |
+| Inception-Net | 22,115,894  | 0.811    |  0.0006  |             174.2     |
 
 
 ### Confusion Matrix 
