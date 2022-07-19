@@ -20,6 +20,7 @@ from tensorflow.keras.datasets import cifar10
 from sklearn.metrics import f1_score, precision_score, recall_score, confusion_matrix, accuracy_score
 import time
 from keras.callbacks import ModelCheckpoint
+from keras_flops import get_flops
 
 
 
@@ -155,8 +156,11 @@ if __name__ == '__main__':
             t=time.time()-t
             v=t/a
             print('latency:', v)
+            flops = get_flops(M1, batch_size=1)
+            print(f"FLOPS: {flops / 10 ** 9:.03} G")
             L_hat = np.argmax(L_hat, axis=1)
             print(np.unique(L_hat))
+
             test_labels1=np.argmax(test_labels,axis=1)
             print(np.unique(L_hat))
             print('precision:',precision_score(test_labels1,L_hat, average="macro"))
