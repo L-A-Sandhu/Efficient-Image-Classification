@@ -70,10 +70,10 @@ https://drive.google.com/file/d/144j9-G-v2x6YCTZ4u9_NDzXpVnVwT_kC/view?usp=shari
 ## Results and comparision 
 Test results and comparision for both models is shown in the following table
 
-| Model         | Parameters | Accuracy | Latency(sec)   | Size on Disk (MB)| Flops |
-|---------------|-------------|----------|----------------|------------------|-------|
-| Mobile-Net    | 3,783,510   | 0.836    |  0.0004        |        38.89     |0.116 G|
-| Inception-Net | 22,115,894  | 0.811   |  0.0006        |        174.2      |0.681 G|
+| Model         | Parameters  |Acc.FineTune|Acc. Scratch|Latency(sec)   | Size on Disk (MB)| Flops |
+|---------------|-------------|------------|------------|---------------|------------------|-------|
+| Mobile-Net    | 3,743,718   | 0.852      |   0.76     |   0.0004      |        38.89    |0.116 G|
+| Inception-Net | 22,115,894  | 0.811      |   0.73     |   0.0006      |        174.2    |0.681 G|
 
 
 ### Confusion Matrix 
