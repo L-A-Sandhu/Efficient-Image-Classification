@@ -21,8 +21,8 @@ from sklearn.metrics import f1_score, precision_score, recall_score, confusion_m
 import time
 from keras.callbacks import ModelCheckpoint
 from keras_flops import get_flops
-
-
+import onnx
+import tf2onnx
 
 def data_load():
     class_names = ['airplane', 'automobile', 'bird', 'cat', 'deer','dog', 'frog', 'horse', 'ship', 'truck']
@@ -101,7 +101,8 @@ if __name__ == '__main__':
 
 
         parser = argparse.ArgumentParser(description='MobileNetV2 Keras ') 
-        parser.add_argument("--model_dir", type= str , default='./checkpoint/', help='path to the save or load the chekpoint')    
+        parser.add_argument("--model_dir", type= str , default='./checkpoint/', help='path to the save or load the chekpoint')   
+        parser.add_argument("--onnx_dir", type= str , default='./onnx/', help='path to the save or load onnx model')     
         parser.add_argument("--inps", type= str, default='test', help='select test, train')
         parser.add_argument("--b_s", type=int,default=32, help="Batch Size")
         parser.add_argument("--e", type=int,default=1, help="Epochs")
@@ -223,5 +224,18 @@ if __name__ == '__main__':
                           callbacks = [early_stop,checkpoint]
                        )
                 A_L_Plot(history)
+        if args.inps == 'conv':
+            if not os.path.exists(args.onnx_dir):
+                os.makedirs(args.onnx_dir)
+
+                # Load the TensorFlow model
+            args.onnx_dir+"model.onnx"
+            model = tf.keras.models.load_model(args.model_dir)
+
+            # Convert the TensorFlow model to the ONNX format
+            onnx_model, _ = tf2onnx.convert.from_keras(model)
+            with open(args.onnx_dir+"model.onnx", "wb") as f:
+                f.write(onnx_model.SerializeToString())
+
 
 

@@ -14,7 +14,9 @@ from tensorflow.keras.applications.inception_v3 import InceptionV3
 from tensorflow.keras import models
 from tensorflow.keras import layers
 from tensorflow.keras import optimizers
-from tensorflow.keras import callbacks
+#from tensorflow.keras import callbacks
+from tensorflow.keras.callbacks import ModelCheckpoint
+from tensorflow.keras.callbacks import EarlyStopping
 from keras.utils import np_utils
 from tensorflow.keras.models import Model
 from sklearn.model_selection import train_test_split
@@ -30,8 +32,8 @@ from sklearn.metrics import f1_score, precision_score, recall_score, confusion_m
 import time
 from keras.callbacks import ModelCheckpoint
 from keras_flops import get_flops
-
-
+import onnx
+import tf2onnx
 # In[2]:
 
 
@@ -93,7 +95,11 @@ def A_L_Plot(history):
     plt.xlabel('epoch')
     plt.savefig('Training_loss.png',dpi=100)
     plt.show()
-    
+
+
+
+
+
 
 
 
@@ -111,10 +117,13 @@ if __name__ == '__main__':
 
 
         parser = argparse.ArgumentParser(description='MobileNetV2 Keras ') 
-        parser.add_argument("--model_dir", type= str , default='./checkpoint/', help='path to the save or load the chekpoint')    
+        parser.add_argument("--model_dir", type= str , default='./checkpoint/', help='path to the save or load the chekpoint')  
+        parser.add_argument("--onnx_dir", type= str , default='./onnx/', help='path to the save or load onnx model')     
+        parser.add_argument("--onx", type= str , default='./onxx/', help='path to save converted onxx model')    
         parser.add_argument("--inps", type= str, default='test', help='select test, train')
         parser.add_argument("--b_s", type=int,default=32, help="Batch Size")
         parser.add_argument("--e", type=int,default=1, help="Epochs")
+
         args = parser.parse_args()
 
         train_images,test_images,train_labels,test_labels,class_names=data_load()
@@ -158,8 +167,8 @@ if __name__ == '__main__':
             t=time.time()-t
             v=t/a
             print('latency:', v)
-            flops = get_flops(M1, batch_size=1)
-            print(f"FLOPS: {flops / 10 ** 9:.03} G")
+            #flops = get_flops(M1, batch_size=1)
+            #print(f"FLOPS: {flops / 10 ** 9:.03} G")
             L_hat = np.argmax(L_hat, axis=1)
             print(np.unique(L_hat))
             test_labels1=np.argmax(test_labels,axis=1)
@@ -172,6 +181,7 @@ if __name__ == '__main__':
 
 
         if args.inps == 'train' :
+            print('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>', train_images[0].shape)
             if not os.path.exists(args.model_dir):
                 os.makedirs(args.model_dir)
             MobileNetV2 = MobileNetV2(include_top=False,
@@ -181,7 +191,7 @@ if __name__ == '__main__':
                                 alpha=1.0,
                                input_tensor=None)
             Model=model_init(MobileNetV2,class_names)
-            early_stop = callbacks.EarlyStopping(monitor='val_loss', mode='min', verbose=1, patience=7)
+            early_stop = EarlyStopping(monitor='val_loss', mode='min', verbose=1, patience=7)
             checkpoint = ModelCheckpoint(args.model_dir, monitor='loss', verbose=1, save_best_only=True, mode='min')
             Model.compile(loss='categorical_crossentropy',
                           optimizer='adam',
@@ -192,7 +202,7 @@ if __name__ == '__main__':
                       batch_size=args.b_s,
                       verbose=1,
                       validation_data=(test_images,test_labels),
-                      callbacks = [early_stop, checkpoint]
+                      ModelCheckpoint = [early_stop, checkpoint]
                    )
             A_L_Plot(history)
         
@@ -215,5 +225,17 @@ if __name__ == '__main__':
                           callbacks = [early_stop,checkpoint]
                        )
                 A_L_Plot(history)
+        if args.inps == 'conv':
+            if not os.path.exists(args.onnx_dir):
+                os.makedirs(args.onnx_dir)
+
+                # Load the TensorFlow model
+            args.onnx_dir+"model.onnx"
+            model = tf.keras.models.load_model(args.model_dir)
+
+            # Convert the TensorFlow model to the ONNX format
+            onnx_model, _ = tf2onnx.convert.from_keras(model)
+            with open(args.onnx_dir+"model.onnx", "wb") as f:
+                f.write(onnx_model.SerializeToString())
 
 
