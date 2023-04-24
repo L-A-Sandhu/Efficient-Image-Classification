@@ -56,9 +56,15 @@ python Mobile-Net.py --model_dir='./checkpoint/' --inp=test
 ```
 ### Resume Training 
 ```
-python <Mobile-Net.py or Inception-Net.py >  --model_dir=<Location for saving model> --inp= <tune, train, test, resume > --b_s=< Batch size> --e=<epoch>
+python <Mobile-Net.py or Inception-Net.py >  --model_dir=<Location for saving/loading model> --inp= <tune, train, test, resume,conv > --b_s=< Batch size> --e=<epoch>
 example command 
 python Mobile-Net.py  --model_dir='./checkpoint/' --inp=resume --b_s=16 --e=100
+```
+## Convert to ONNX 
+```
+python <Mobile-Net.py or Inception-Net.py >  --model_dir=<Location for loading saved check point> --onnx_dir=< Location to save onnx model> --inp= <tune, train, test, resume, conv > 
+example command 
+python Mobile-Net.py  --model_dir='./checkpoint/' --onnx_dir='./onnx/'--inp=conv 
 ```
 
 ## Pretrained Model
